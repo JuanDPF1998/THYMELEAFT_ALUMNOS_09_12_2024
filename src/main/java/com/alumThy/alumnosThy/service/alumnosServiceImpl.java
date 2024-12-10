@@ -3,10 +3,12 @@ package com.alumThy.alumnosThy.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.alumThy.alumnosThy.model.alumnosModel;
 import com.alumThy.alumnosThy.reposity.alumnosRepositorio;
 
+@Service
 public class alumnosServiceImpl implements alumnosService{
 
 	/*
