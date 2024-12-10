@@ -1,22 +1,21 @@
 package com.alumThy.alumnosThy.controller;
 
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
-import com.alumThy.alumnosThy.model.alumnosModel;
 import com.alumThy.alumnosThy.service.alumnosService;
 
 /*
- * SE UTILIZA PARA MARCAR UNA CLASE COMO UN CONTROLADOR DE REST (REPRESENTATIONAL 
- * STATE TRANSFER). Se utiliza EN SERVICIOS WEB RESFULT, ES DECIR, PARA MANEJAR 
- * LAS SOLICITUDES HTTP Y RESPONDER CON DATOS EN FORMATO JSON (AUN QUE EL FORMATO MAS
- * COMUN ES JSON O XML).
+ * SE UTILIZA PARA MARCAR UNA CLASE COMO UN CONTROLADOR EN UNA APLICACION WEB 
+ * BASADA EN EL PATRON MVC (MODEL-VIEW-CONTROLLER). EL PROPOSITO DE ESTA ANOTACION 
+ * ES MANEJAR SOLICITUDES HTTP Y DEVOLVER VISTAS COMO RESPUESTA, TIPICAMENTE PAGINAS HTML 
+ * UTILIZANDO UN MOTOR DE PLANTILLAS COMO THYMELEAFT O JSP
  */
-@RestController
+@Controller
 @RequestMapping("/api/alumnos")
 public class alumnosController {
 
@@ -27,9 +26,10 @@ public class alumnosController {
 	@Autowired
 	private alumnosService servicio;
 	
-	@GetMapping("/listado")
-	public List<alumnosModel> listarAlumnos()
+	@GetMapping("/lista")
+	public String Listado(Model model)
 	{
-		return servicio.listarTodos();
+		model.addAttribute("alumnos", servicio.listarTodos());
+		return "Listado_estudiantes";
 	}
 }
