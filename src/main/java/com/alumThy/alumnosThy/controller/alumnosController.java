@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.alumThy.alumnosThy.model.alumnosModel;
@@ -28,10 +29,6 @@ public class alumnosController {
 	@Autowired
 	private alumnosService servicio;
 	
-	/*
-	 * ACCEDEMOS A LA URL CON GETMAPPING, MAPEA NUESTRA RUTA E INGRESAMOS AL NAVEGADOR,
-	 * CON EL METODO LISTAR, MUESTRA TODOS LOS REGISTROS EN MI SITIO WEB. 
-	 */
 	@GetMapping("/lista")
 	public String Listado(Model model)
 	{
@@ -52,10 +49,10 @@ public class alumnosController {
 	/*
 	 * METODO ENCARGADO DE INSERTAR UN NUEVO REGISTRO ESTUDIANTE EN LA BASE DE DATOS
 	 */
-	@GetMapping("/guardar")
-	public String agregarRegistro(@ModelAttribute alumnosModel alummodel)
+	@PostMapping("/guardar")
+	public String registrarRegistro(@ModelAttribute alumnosModel alumno)
 	{
-		 servicio.guardarEstudiante(alummodel);
-		 return "redirect:/api/alumnos/listar";
+		servicio.guardarNuevo(alumno);
+		return "/api/alumnos/lista";
 	}
 }

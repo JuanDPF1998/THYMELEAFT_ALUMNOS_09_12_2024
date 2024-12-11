@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import com.alumThy.alumnosThy.model.alumnosModel;
 import com.alumThy.alumnosThy.reposity.alumnosRepositorio;
@@ -31,7 +30,8 @@ public class alumnosServiceImpl implements alumnosService{
 	}
 
 	@Override
-	public alumnosModel guardarEstudiante(alumnosModel alumno) {
-		return repositorio.save(alumno);
+	public alumnosModel guardarNuevo(alumnosModel alumnos) {
+		return repositorio.save(alumnos);
 	}
+
 }
