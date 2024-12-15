@@ -53,6 +53,6 @@ public class alumnosController {
 	public String registrarRegistro(@ModelAttribute alumnosModel alumno)
 	{
 		servicio.guardarNuevo(alumno);
-		return "/api/alumnos/lista";
+		return "redirect:/api/alumnos/lista";
 	}
 }
