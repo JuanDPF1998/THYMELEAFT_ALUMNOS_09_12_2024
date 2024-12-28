@@ -40,7 +40,12 @@ public class alumnosServiceImpl implements alumnosService{
 	}
 	
 	@Override
-	public alumnosModel obtenerAlumnoPorId(Long id) {
+	public alumnosModel obtenerEstudiantePorId(Long id) {
 		return repositorio.findById(id).orElse(null);
+	}
+
+	@Override
+	public void eliminarEstudiantePorId(Long id) {
+		repositorio.deleteById(id);
 	}
 }

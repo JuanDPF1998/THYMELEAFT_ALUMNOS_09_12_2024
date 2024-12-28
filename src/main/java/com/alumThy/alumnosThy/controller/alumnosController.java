@@ -62,7 +62,7 @@ public class alumnosController {
 	@GetMapping("/verFormEditar/{id}")
 	public String mostrarFormularioEditar(@PathVariable Long id, Model model) 
 	{
-	model.addAttribute("alumno", servicio.obtenerAlumnoPorId(id));
+	model.addAttribute("alumno", servicio.obtenerEstudiantePorId(id));
 	return "Actualizar_estudiantes";
 	}
 	
@@ -74,7 +74,7 @@ public class alumnosController {
 	public String editarRegistroAlumno(@PathVariable Long id, @ModelAttribute("alumno") 
 	alumnosModel alumno)
 	{
-		alumnosModel existeElRegistro = servicio.obtenerAlumnoPorId(id);
+		alumnosModel existeElRegistro = servicio.obtenerEstudiantePorId(id);
 		existeElRegistro.setId(id);
 		existeElRegistro.setNombres(alumno.getNombres());
 		existeElRegistro.setApellidos(alumno.getApellidos());
@@ -84,6 +84,15 @@ public class alumnosController {
 		
 		servicio.guardarNuevo(existeElRegistro);
 		
+		return "redirect:/api/alumnos/lista";
+	}
+	/*
+	 * ACCION O FUNCION ELIMINAR POR ID
+	 */
+	@GetMapping("/eliminar/{id}")
+	public String eliminarEstudiantePorId(@PathVariable Long id)
+	{
+		servicio.eliminarEstudiantePorId(id);
 		return "redirect:/api/alumnos/lista";
 	}
 }

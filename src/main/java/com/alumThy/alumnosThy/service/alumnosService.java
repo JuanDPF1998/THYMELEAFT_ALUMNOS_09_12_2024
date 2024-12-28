@@ -10,5 +10,6 @@ public interface alumnosService {
 	public List<alumnosModel> listarTodos();
 	public alumnosModel guardarNuevo(alumnosModel alumnos);
 	public alumnosModel actualizarAlumno(alumnosModel alumno);
-	public alumnosModel obtenerAlumnoPorId(Long id);
+	public alumnosModel obtenerEstudiantePorId(Long id);
+	public void eliminarEstudiantePorId(Long id);
 }
