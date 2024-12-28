@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+	integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N"
+	crossorigin="anonymous">
+</head>
+<body>
+	<!-- Cabecera -->
+	<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+		<a class="navbar-brand" href="#">Editar registro</a>
+
+		<!-- Botón para colapsar en pantallas pequeñas -->
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#collapsibleNavbar" aria-controls="collapsibleNavbar"
+			aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<!-- NavBar links -->
+		<div class="collapse navbar-collapse" id="collapsibleNavbar">
+			<ul class="navbar-nav">
+				<li class="nav-item"><a class="nav-link"
+					th:href="@{/api/alumnos/lista}">Inicio</a></li>
+			</ul>
+		</div>
+	</nav>
+
+	<div class="container">
+		<div class="row">
+			<div
+				class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
+				<h2 class="text-center">Actualizar registro</h2>
+				<div class="card-body">
+					<form th:action="@{/api/alumnos/actualizar/{id}(id=${alumno.id})}"
+						th:object="${alumno}" method="POST">
+						<div class="form-group">
+							<label>Nombres:</label> <input type="text" name="nombres"
+								th:field="*{nombres}" class="form-control"
+								placeholder="Ingresar nombres" required="required">
+						</div>
+						<div class="form-group">
+							<label>Apellidos:</label> <input type="text" name="apellidos"
+								th:field="*{apellidos}" class="form-control"
+								placeholder="Ingresar apellidos" required="required">
+						</div>
+						<div class="form-group">
+							<label>Matricula:</label> <input type="text" name="matricula"
+								th:field="*{matricula}" class="form-control"
+								placeholder="Ingresar una matricula" required="required">
+						</div>
+						<div class="form-group">
+							<label>Correo:</label> <input type="text" name="correo"
+								th:field="*{correo}" class="form-control"
+								placeholder="Ingresar correo electronico" required="required">
+						</div>
+						<div class="form-group">
+							<label>Telefono:</label> <input type="text" name="Telefono"
+								th:field="*{Telefono}" class="form-control"
+								placeholder="Ingresar un numero de telefono">
+						</div>
+						<div class="box-footer">
+							<button class="btn btn-success" type="submit">Guardar</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

@@ -34,4 +34,13 @@ public class alumnosServiceImpl implements alumnosService{
 		return repositorio.save(alumnos);
 	}
 
+	@Override
+	public alumnosModel actualizarAlumno(alumnosModel alumno) {
+		return repositorio.save(alumno);
+	}
+	
+	@Override
+	public alumnosModel obtenerAlumnoPorId(Long id) {
+		return repositorio.findById(id).orElse(null);
+	}
 }

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -40,7 +41,7 @@ public class alumnosController {
 	 * EN UNA NUEVA VENTANA Y RUTA, ESTA ACCION VA DE LA MANO DEL METODO QUE INSERTARARA UN NUEVO REGISTRO,
 	 * ES DECIR LA ACCION MOSTRAR FORMULARIO Y METODO INSERTAR. 
 	 */
-	@GetMapping("/NuevoRegistro")
+	@GetMapping("/verFormRegistrar")
 	public String mostrarFormulario(Model model)
 	{
 		model.addAttribute("alumno", new alumnosModel());
@@ -53,6 +54,36 @@ public class alumnosController {
 	public String registrarRegistro(@ModelAttribute alumnosModel alumno)
 	{
 		servicio.guardarNuevo(alumno);
+		return "redirect:/api/alumnos/lista";
+	}
+	/*
+	 * SOLO MUESTRA EL FORMULARIO EDITAR.
+	 */
+	@GetMapping("/verFormEditar/{id}")
+	public String mostrarFormularioEditar(@PathVariable Long id, Model model) 
+	{
+	model.addAttribute("alumno", servicio.obtenerAlumnoPorId(id));
+	return "Actualizar_estudiantes";
+	}
+	
+	/*
+	 * ACCION O FUNCION ENCARGADA DE TRAER TRAER LOS DATOS Y VISUALIZARLOS EN EL FORMULARIO,
+	 * A DEMAS DE PERMITIR LA MODIFICACION DEL MISMO REGISTRO, METODOS GET Y SET.
+	 */
+	@PostMapping("/actualizar/{id}")
+	public String editarRegistroAlumno(@PathVariable Long id, @ModelAttribute("alumno") 
+	alumnosModel alumno)
+	{
+		alumnosModel existeElRegistro = servicio.obtenerAlumnoPorId(id);
+		existeElRegistro.setId(id);
+		existeElRegistro.setNombres(alumno.getNombres());
+		existeElRegistro.setApellidos(alumno.getApellidos());
+		existeElRegistro.setMatricula(alumno.getMatricula());
+		existeElRegistro.setCorreo(alumno.getCorreo());
+		existeElRegistro.setTelefono(alumno.getTelefono());
+		
+		servicio.guardarNuevo(existeElRegistro);
+		
 		return "redirect:/api/alumnos/lista";
 	}
 }
